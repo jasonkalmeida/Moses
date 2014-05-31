@@ -4,29 +4,70 @@
 	  
 	  
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
 	
     <style type="text/css">
-	
-	
-		html, body, #map-canvas {
-	        height: 100%;
-	        margin: 0px;
-	        padding: 0px
-	      }
-		  
-	     #panel {
-	        position: absolute;
-	        top: 5px;
-	        left: 50%;
-	        margin-left: -180px;
-	        z-index: 5;
-	        background-color: #fff;
-	        padding: 5px;
-	        border: 1px solid #999;
-	      }
-	  
-	  
+    @import url("font-awesome.min.css");
+    
+    html { 
+        height: 100% ;
+        font-family: roberto, "helvetica neue", arial; 
+        font-weight:300;
+        color: #3F3F3F;
+        letter-spacing: .01em;
+    }
+
+    body { 
+        height: 100%; 
+        margin: 0; 
+        padding: 0 
+    }
+
+    #map-canvas { 
+        height: 100% 
+    }
+    
+    p{
+      font-size:2em;
+    }
+    
+    #search{
+        position:absolute;
+        left:20px;
+        top:20px;
+        z-index:1;
+        width:40%;
+    } 
+
+    form{
+        border: 0px solid;
+        padding: 0.75em;
+        outline:0px none;
+        background:#fff;
+        width:100%;
+        }
+    
+    input{
+        display:block;
+        width:90%;
+        background-color:#fff;
+        page-break-inside:10px;
+        margin:12px auto;
+        padding:.25em;
+        border: 1px solid #9F9F9F;
+        font-size: 1em;
+        letter-spacing: .05em;
+        font-family: roberto, "helvetica neue", arial; 
+        font-weight: 300;
+        color: #3F3F3F;
+    }
+    
+    .sendbutton {
+        width:93%;
+        margin:0px auto 12px;
+        padding:.25em;
+    }
+
     </style>
 	
 	
@@ -129,33 +170,13 @@
 	
 	
 	
-	<form style="text-align:center;font-size:28px">
-	Start Point: <input type="text" name="startpoint">
-	End Point: <input type="text" name="endpoint">
-	<input type="submit" value="Submit" onclick="calcRoute();">
-	</form>
-	  
-	
-		
-		
-		
-		
-		
-	    <div id="panel">
-	       <b>Start: </b>
-	       <select id="start" >
-	         <option value="haight">Haight-Ashbury</option>
-		 	<input type="submit" value="Submit" onclick="calcRoute();">
-	         
-	       </select>
-	       <b>End: </b>
-	       <select id="end" >
-	         <option value="oceanBeach">Ocean Beach</option>
-		 	<input type="submit" value="Submit" onclick="calcRoute();">
-	         
-	       </select>
-	       </div>
-		
+	<div id="search">
+	<form>
+	<input id="name" type="text" name="startpoint" placeholder="Start Point">
+	<input id="name" type="text" name="endpoint" placeholder="End Point">
+	<input class="sendbutton" type="submit" value="Submit" >
+    </form>
+    </div>
 		
 		
 		
