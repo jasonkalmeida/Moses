@@ -13,3 +13,6 @@
 
 DATA
 https://data.sfgov.org/Public-Safety/SFPD-Incidents-Previous-Three-Months/tmnf-yvry
+
+Link for the MAP api
+http://socrata.github.io/presentations/hackathons/2014-05-31-ndoch/#/2/6
