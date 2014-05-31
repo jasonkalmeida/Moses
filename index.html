@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  
+	  
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	
+	
+    <style type="text/css">
+	
+	
+      html { height: 100% }
+	  
+      body { height: 100%; margin: 0; padding: 0 }
+	  
+      #map-canvas { height: 100% }
+	  
+	  
+    </style>
+	
+	
+    <script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3IKU7LrNTdQ0OUU4SCvLUmVytSrNZDZM&sensor=SET_TO_TRUE_OR_FALSE">
+    </script>
+	
+	<script type="text/javascript"
+	  src="http://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
+	
+    <script type="text/javascript">
+	
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(37.76, -122.4167),
+          zoom: 13
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+	  
+	  
+    </script>
+	
+	
+	
+	
+  </head>
+  
+  
+  <body>
+	
+	<form style="text-align:center;font-size:28px">
+	Start Point: <input type="text" name="startpoint">
+	End Point: <input type="text" name="endpoint">
+	<input type="submit" value="Submit">
+	</form>
+	  
+    <div id="map-canvas"/>
+	
+	
+  </body>
+  
+  
+</html>
