@@ -115,20 +115,6 @@
 	  var request = {
 	    origin:start,
 	    destination:end,
-<<<<<<< HEAD
-        provideRouteAlternatives: true,
-	    travelMode: google.maps.TravelMode.WALKING
-	  };
-
-
-	  directionsService.route(request, function(result, status) {
-	    if (status == google.maps.DirectionsStatus.OK) {
-	      directionsDisplay.setDirections(result);
-	    }
-	  });
-	  
-	  
-=======
 	    travelMode: google.maps.TravelMode.WALKING,
         provideRouteAlternatives: true
 	  };
@@ -148,10 +134,7 @@
 	          }
 	      }
 	  );
->>>>>>> FETCH_HEAD
 	}
-	
-	
 	
 	
 	
