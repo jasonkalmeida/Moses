@@ -84,137 +84,12 @@
 	
     <script type="text/javascript">
 	  
-	/*
-	  
-	var directionsDisplay;
-	var directionsService = new google.maps.DirectionsService();
-	var map;
-	var haight = new google.maps.LatLng(37.7699298, -122.4469157);
-	var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-
-	function initialize() {
-	  directionsDisplay = new google.maps.DirectionsRenderer();
-	  var mapOptions = {
-	    zoom: 13,
-	    center: haight
-	  }
-	  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	  directionsDisplay.setMap(map);
-	}
-
-	function calcRoute() {
-	  var selectedMode = document.getElementById('mode').value;
-	  var request = {
-	      origin: haight,
-	      destination: oceanBeach,
-	      // Note that Javascript allows us to access the constant
-	      // using square brackets and a string value as its
-	      // "property."
-	      travelMode: google.maps.TravelMode[selectedMode]
-	  };
-	  directionsService.route(request, function(response, status) {
-	    if (status == google.maps.DirectionsStatus.OK) {
-	      directionsDisplay.setDirections(response);
-	    }
-	  });
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
 	
-	
-	var directionsDisplay;
-	var directionsService = new google.maps.DirectionsService();
-	var map;
-	
-	var startpoint = $(startpoint);
-	var endpoint = $(endpoint);
-	
-	
-	var haight = new google.maps.LatLng(37.7699298, -122.4469157);
-	var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-
-	function initialize() {
-	  directionsDisplay = new google.maps.DirectionsRenderer();
-	  var sanfran = new google.maps.LatLng(37.7699298, -122.4469157);
-	  var mapOptions = {
-	    zoom:13,
-	    center: sanfran
-	  }
-	  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	  directionsDisplay.setMap(map);
-	}
-
-	function calcRoute() {
-	  var start = document.getElementById('start').value;
-	  var end = document.getElementById('end').value;
-	  var request = {
-	      origin:start,
-	      destination:end,
-	      travelMode: google.maps.TravelMode.WALKING
-	  };
-	  directionsService.route(request, function(response, status) {
-	    if (status == google.maps.DirectionsStatus.OK) {
-	      directionsDisplay.setDirections(response);
-	    }
-	  });
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-	  
-	/*
-	function getRoute() {
-	    document.getElementById("#router").submit();
-	}
-	
-	
-	
-    var geocoder;
-     var infowindow = new google.maps.InfoWindow();
-     var marker;
-     
-
-     function codeLatLng() {
-       var input = document.getElementById("latlng").value;
-       var latlngStr = input.split(",",2);
-       var lat = parseFloat(latlngStr[0]);
-       var lng = parseFloat(latlngStr[1]);
-       var latlng = new google.maps.LatLng(lat, lng);
-       geocoder.geocode({'latLng': latlng}, function(results, status) {
-         if (status == google.maps.GeocoderStatus.OK) {
-           if (results[1]) {
-             map.setZoom(11);
-             marker = new google.maps.Marker({
-                 position: latlng,
-                 map: map
-             });
-             infowindow.setContent(results[1].formatted_address);
-             infowindow.open(map, marker);
-           }
-         } else {
-           alert("Geocoder failed due to: " + status);
-         }
-       });
-	   
-	   function codeAddress() {
-	       var address = document.getElementById("address").value;
-	       geocoder.geocode( { 'address': address}, function(results, status) {
-	         if (status == google.maps.GeocoderStatus.OK) {
-	           map.setCenter(results[0].geometry.location);
-	           var marker = new google.maps.Marker({
-	               map: map,
-	               position: results[0].geometry.location
-	           });
-	         } else {
-	           alert("Geocode was not successful for the following reason: " + status);
-	         }
-	       });
-	     }
-	   
-     }
-	 */
 	
 	var geocoder;
 	var map;
+	var startpoint;
+	var endpoint;
 	
 	function initialize() {
 	  geocoder = new google.maps.Geocoder();
@@ -229,8 +104,11 @@
 
 
 	function codeAddress() {
-	  var address = document.getElementById('address1').value;
+		
+		//GETS START POINT
+	  var address = document.getElementById('address1').value;	  
 	  geocoder.geocode( { 'address': address}, function(results, status) {
+		startpoint = results[0].geometry.location;
 	    if (status == google.maps.GeocoderStatus.OK) {
 	      map.setCenter(results[0].geometry.location);
 	      var marker = new google.maps.Marker({
@@ -243,24 +121,63 @@
 	    }
 		
 	  });
+	  
+	  //GETS ENDPOINT
 	  address = document.getElementById('address2').value;
 	  geocoder.geocode( { 'address': address}, function(results, status) {
-	    if (status == google.maps.GeocoderStatus.OK) {
+  		endpoint = results[0].geometry.location;
+		if (status == google.maps.GeocoderStatus.OK) {
 	      map.setCenter(results[0].geometry.location);
 	      var marker = new google.maps.Marker({
 	          map: map,
 	          position: results[0].geometry.location
 	      });
+		   
 	    } 
 		else {
 	      alert('Geocode was not successful for the following reason: ' + status);
 	    }
 		
+		var midpoint = startpoint - endpoint;
+	  	alert(startpoint + " " + endpoint + " " + midpoint);
+	  	
+		
+		
 	  });
+	  
+	  
+	  
 	}
 	
+	
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
+
+		
+		
+	var directionsDisplay;
+	var directionsService = new google.maps.DirectionsService();
+
+	
+
+	function calcRoute() {
+	  var start = document.getElementById('start').value;
+	  var end = document.getElementById('end').value;
+	  var request = {
+	      origin:start,
+	      destination:end,
+	      travelMode: google.maps.TravelMode.DRIVING
+	  };
+	  directionsService.route(request, function(response, status) {
+	    if (status == google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(response);
+	    }
+	  });
+	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+	
 	  
     </script>
 	
