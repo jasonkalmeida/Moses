@@ -96,24 +96,6 @@
     directionsDisplay = new google.maps.DirectionsRenderer();
 	
 	
-
-	function calcRoute() {
-	  var start = document.getElementById('start').value;
-	  var end = document.getElementById('end').value;
-	  var request = {
-	      origin:start,
-	      destination:end,
-	      travelMode: google.maps.TravelMode.WALKING
-	  };
-	  directionsService.route(request, function(response, status) {
-	    if (status == google.maps.DirectionsStatus.OK) {
-	      directionsDisplay.setDirections(response);
-	    }
-	  });
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-	
 	function initialize() {
 	  geocoder = new google.maps.Geocoder();
 	  var latlng = new google.maps.LatLng(37.7699298, -122.4469157);
@@ -122,54 +104,24 @@
 	    center: latlng
 	  }
 	  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	  directionsDisplay.setMap(map);
+	  
 	}
 
 
-
-	function codeAddress() {
-		
-		//GETS START POINT
-	  var address = document.getElementById('address1').value;	  
-	  geocoder.geocode( { 'address': address}, function(results, status) {
-		startpoint = results[0].geometry.location;
-	    if (status == google.maps.GeocoderStatus.OK) {
-	      map.setCenter(results[0].geometry.location);
-	      var marker = new google.maps.Marker({
-	          map: map,
-	          position: results[0].geometry.location
-	      });
-	    } 
-		else {
-	      alert('Geocode was not successful for the following reason: ' + status);
+	function calcRoute() {
+	  var start = document.getElementById("address1").value;
+	  var end = document.getElementById("address2").value;
+	  var request = {
+	    origin:start,
+	    destination:end,
+	    travelMode: google.maps.TravelMode.WALKING
+	  };
+	  directionsService.route(request, function(result, status) {
+	    if (status == google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(result);
 	    }
-		
 	  });
-	  
-	  //GETS ENDPOINT
-	  address = document.getElementById('address2').value;
-	  geocoder.geocode( { 'address': address}, function(results, status) {
-  		endpoint = results[0].geometry.location;
-		if (status == google.maps.GeocoderStatus.OK) {
-	      map.setCenter(results[0].geometry.location);
-	      var marker = new google.maps.Marker({
-	          map: map,
-	          position: results[0].geometry.location
-	      });
-		   
-	    } 
-		else {
-	      alert('Geocode was not successful for the following reason: ' + status);
-	    }
-		
-		var midpoint = startpoint - endpoint;
-	  	//alert(startpoint + " " + endpoint + " " + midpoint);
-	  	
-		
-		
-	  });
-	  
-	  
-	  
 	}
 	
 	
@@ -199,7 +151,7 @@
 	<form id="router">
 	<input id="address1" class="start" type="text" name="startpoint" placeholder="Start Point">
 	<input id="address2" class="end" type="text" name="endpoint" placeholder="End Point">
-	<input class="sendbutton" type="button" onclick="codeAddress()" value="Submit" >
+	<input class="sendbutton" type="button" onclick="calcRoute()" value="Submit" >
     </form>
     </div>
 		
