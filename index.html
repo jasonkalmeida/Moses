@@ -91,6 +91,29 @@
 	var startpoint;
 	var endpoint;
 	
+	var directionsDisplay;
+	var directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+	
+	
+
+	function calcRoute() {
+	  var start = document.getElementById('start').value;
+	  var end = document.getElementById('end').value;
+	  var request = {
+	      origin:start,
+	      destination:end,
+	      travelMode: google.maps.TravelMode.WALKING
+	  };
+	  directionsService.route(request, function(response, status) {
+	    if (status == google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(response);
+	    }
+	  });
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
 	function initialize() {
 	  geocoder = new google.maps.Geocoder();
 	  var latlng = new google.maps.LatLng(37.7699298, -122.4469157);
@@ -139,7 +162,7 @@
 	    }
 		
 		var midpoint = startpoint - endpoint;
-	  	alert(startpoint + " " + endpoint + " " + midpoint);
+	  	//alert(startpoint + " " + endpoint + " " + midpoint);
 	  	
 		
 		
@@ -156,27 +179,7 @@
 
 		
 		
-	var directionsDisplay;
-	var directionsService = new google.maps.DirectionsService();
 
-	
-
-	function calcRoute() {
-	  var start = document.getElementById('start').value;
-	  var end = document.getElementById('end').value;
-	  var request = {
-	      origin:start,
-	      destination:end,
-	      travelMode: google.maps.TravelMode.DRIVING
-	  };
-	  directionsService.route(request, function(response, status) {
-	    if (status == google.maps.DirectionsStatus.OK) {
-	      directionsDisplay.setDirections(response);
-	    }
-	  });
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
 	
 	  
     </script>
