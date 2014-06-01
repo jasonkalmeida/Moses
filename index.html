@@ -115,6 +115,7 @@
 	  var request = {
 	    origin:start,
 	    destination:end,
+<<<<<<< HEAD
         provideRouteAlternatives: true,
 	    travelMode: google.maps.TravelMode.WALKING
 	  };
@@ -127,6 +128,27 @@
 	  });
 	  
 	  
+=======
+	    travelMode: google.maps.TravelMode.WALKING,
+        provideRouteAlternatives: true
+	  };
+	  directionsService.route(
+	      request,
+	      function (response, status) {
+	          if (status == google.maps.DirectionsStatus.OK) {
+	              for (var i = 0, len = response.routes.length; i < len; i++) {
+	                  new google.maps.DirectionsRenderer({
+	                      map: map,
+	                      directions: response,
+	                      routeIndex: i
+	                  });
+	              }
+	          } else {
+	              $("#error").append("Unable to retrieve your route<br />");
+	          }
+	      }
+	  );
+>>>>>>> FETCH_HEAD
 	}
 	
 	
