@@ -115,14 +115,21 @@
 	  var request = {
 	    origin:start,
 	    destination:end,
+        provideRouteAlternatives: true,
 	    travelMode: google.maps.TravelMode.WALKING
 	  };
+
+
 	  directionsService.route(request, function(result, status) {
 	    if (status == google.maps.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(result);
 	    }
 	  });
+	  
+	  
 	}
+	
+	
 	
 	
 	
